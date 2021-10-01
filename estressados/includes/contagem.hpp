@@ -55,7 +55,7 @@ bool homensSaoMaisEstressadosQueMulheres(std::vector<int> fila) {
         }
     }
 
-    return homens > true;
+    return homens > std::abs(mulheres);
 }
 
 #endif
