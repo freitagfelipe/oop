@@ -6,6 +6,10 @@
 #include <numeric>
 
 float calcularStressMedio(std::vector<int> fila) {
+    for (int &estresse : fila) {
+        estresse = std::abs(estresse);
+    }
+
     return (float) std::accumulate(fila.begin(), fila.end(), 0) / fila.size();
 }
 
