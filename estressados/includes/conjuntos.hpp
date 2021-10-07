@@ -26,8 +26,17 @@ std::vector<int> diferentes(const std::vector<int> &fila) {
 
 std::vector<int> abandonados(const std::vector<int> &fila) {
     std::vector<int> auxiliar;
+    std::vector<int>::iterator it = auxiliar.begin();
 
-    std::copy_if(fila.begin(), fila.end(), std::back_inserter(auxiliar), [fila, &auxiliar](int elemento) { return (std::count(fila.begin(), fila.end(), elemento) > 1) && (std::find(auxiliar.begin(), auxiliar.end(), elemento) == auxiliar.end()); });
+    for (int i = 0; i < fila.size(); i++) {
+        if (std::find(fila.begin(), fila.end(), fila[i]) == auxiliar.end()) {
+            int quantasVezesAparece = std::count(fila.begin(), fila.end(), fila[i]);
+
+            auxiliar.insert(it, quantasVezesAparece - 1, fila[i]);
+
+            it = auxiliar.begin() + auxiliar.size();
+        }
+    }
 
     return auxiliar;
 }
