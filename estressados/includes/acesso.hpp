@@ -4,7 +4,6 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
-#include <ctime>
 
 std::vector<int> inverterComCopia(const std::vector<int> &fila) {
     std::vector<int> auxiliar(fila.begin(), fila.end());
@@ -18,15 +17,13 @@ void inverterInplace(std::vector<int> &fila) {
 }
 
 int sortear(const std::vector<int> &fila) {
-    std::srand(std::time(NULL));
-
     int sorteado = fila.at(rand() % (fila.size() - 1));
 
     return sorteado;
 }
 
 void embaralhar(std::vector<int> &fila) {
-    std::random_shuffle(fila.begin(), fila.end());
+    std::random_shuffle(fila.begin(), fila.end(), [](int x) { return std::rand() % x; });
 }
 
 void ordenar(std::vector<int> &fila) {
