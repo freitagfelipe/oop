@@ -1,7 +1,6 @@
 #ifndef CONTAGEM_HPP
 #define CONTAGEM_HPP
 
-#include <iostream>
 #include <vector>
 #include <numeric>
 
