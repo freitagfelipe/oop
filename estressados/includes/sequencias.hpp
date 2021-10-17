@@ -5,30 +5,30 @@
 
 enum Sexo { feminino, masculino };
 
-int tamanhoDoTime(std::vector<int> &auxiliar, int tamanhoDoTimeAtual, Sexo sexoDoTimeAtual) {
-    if (auxiliar.size() == 0) {
+int tamanhoDoTime(std::vector<int> &fila, int tamanhoDoTimeAtual, Sexo sexoDoTimeAtual) {
+    if (fila.size() == 0) {
         return tamanhoDoTimeAtual;
     }
 
-    Sexo sexoAtual = auxiliar.at(0) > 0 ? masculino : feminino;
+    Sexo sexoAtual = fila.at(0) > 0 ? masculino : feminino;
 
     if (sexoAtual != sexoDoTimeAtual) {
         return tamanhoDoTimeAtual;
     }
 
-    auxiliar.erase(auxiliar.begin());
+    fila.erase(fila.begin());
 
-    return tamanhoDoTime(auxiliar, tamanhoDoTimeAtual + 1, sexoDoTimeAtual);
+    return tamanhoDoTime(fila, tamanhoDoTimeAtual + 1, sexoDoTimeAtual);
 }
 
 int quantosTimes(const std::vector<int> &fila) {
-    std::vector<int> auxiliar(fila);
+    std::vector<int> copia(fila);
     int resultado = 0;
 
-    while (auxiliar.size()) {
-        Sexo atual = auxiliar.at(0) > 0 ? masculino : feminino;
+    while (copia.size()) {
+        Sexo sexoAtual = copia.at(0) > 0 ? masculino : feminino;
 
-        int tamanhoDoTimeAtual = tamanhoDoTime(auxiliar, 0, atual);
+        int tamanhoDoTimeAtual = tamanhoDoTime(copia, 0, sexoAtual);
 
         if (tamanhoDoTimeAtual > 1) {
             resultado++;
@@ -38,31 +38,40 @@ int quantosTimes(const std::vector<int> &fila) {
     return resultado;
 }
 
-int maiorTime(const std::vector<int> &fila) {
-    std::vector<int> auxiliar(fila);
-    int maiorTime = 0;
+std::vector<int> maiorTime(const std::vector<int> &fila) {
+    std::vector<int> auxiliar;
+    std::vector<int> resultado;
+    Sexo timeAtual = fila.at(0) > 0 ? masculino : feminino;
 
-    while (auxiliar.size()) {
-        Sexo atual = auxiliar.at(0) > 0 ? masculino : feminino;
+    for (int i = 0; i < int(fila.size()); i++) {
+        Sexo sexoAtual = fila.at(i) > 0 ? masculino : feminino;
 
-        int tamanhoDoTimeAtual = tamanhoDoTime(auxiliar, 0, atual);
+        if (sexoAtual != timeAtual || i == int(fila.size()) - 1) {
+            timeAtual = sexoAtual;
 
-        if (tamanhoDoTimeAtual > 1 && tamanhoDoTimeAtual > maiorTime) {
-            maiorTime = tamanhoDoTimeAtual;
+            if (auxiliar.size() > 1 && auxiliar.size() > resultado.size()) {
+                resultado = auxiliar;
+            }
+
+            auxiliar.clear();
+
+            auxiliar.push_back(fila.at(i));
+        } else {
+            auxiliar.push_back(fila.at(i));
         }
     }
 
-    return maiorTime;
+    return resultado;
 }
 
 int sozinhosSequencia(const std::vector<int> &fila) {
-    std::vector<int> auxiliar(fila);
+    std::vector<int> copia(fila);
     int sozinhos = 0;
 
-    while (auxiliar.size()) {
-        Sexo atual = auxiliar.at(0) > 0 ? masculino : feminino;
+    while (copia.size()) {
+        Sexo sexoAtual = copia.at(0) > 0 ? masculino : feminino;
 
-        int tamanhoDoTimeAtual = tamanhoDoTime(auxiliar, 0, atual);
+        int tamanhoDoTimeAtual = tamanhoDoTime(copia, 0, sexoAtual);
 
         if (tamanhoDoTimeAtual == 1) {
             sozinhos++;
