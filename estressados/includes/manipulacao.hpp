@@ -5,7 +5,7 @@
 #include <map>
 #include <algorithm>
 
-std::vector<int> sozinhos(const std::vector<int> &fila) {
+std::vector<int> sozinhosManipulacao(const std::vector<int> &fila) {
     std::vector<int> auxiliar;
 
     for (int estresse : fila) {
@@ -13,7 +13,7 @@ std::vector<int> sozinhos(const std::vector<int> &fila) {
         int quantasVezesAparece = std::count_if(fila.begin(), fila.end(), [elementoAtual](int x) { return std::abs(x) == elementoAtual; });
 
         if (quantasVezesAparece == 1) {
-            auxiliar.push_back(elementoAtual);
+            auxiliar.push_back(estresse);
         }
     }
 

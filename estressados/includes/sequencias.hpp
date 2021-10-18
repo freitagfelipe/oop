@@ -46,7 +46,7 @@ std::vector<int> maiorTime(const std::vector<int> &fila) {
     for (int i = 0; i < int(fila.size()); i++) {
         Sexo sexoAtual = fila.at(i) > 0 ? masculino : feminino;
 
-        if (sexoAtual != timeAtual || i == int(fila.size()) - 1) {
+        if (sexoAtual != timeAtual) {
             timeAtual = sexoAtual;
 
             if (auxiliar.size() > 1 && auxiliar.size() > resultado.size()) {
@@ -54,11 +54,13 @@ std::vector<int> maiorTime(const std::vector<int> &fila) {
             }
 
             auxiliar.clear();
-
-            auxiliar.push_back(fila.at(i));
-        } else {
-            auxiliar.push_back(fila.at(i));
         }
+
+        auxiliar.push_back(fila.at(i));
+    }
+
+    if (auxiliar.size() > 1 && auxiliar.size() > resultado.size()) {
+        resultado = auxiliar;
     }
 
     return resultado;
