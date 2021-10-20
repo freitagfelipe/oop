@@ -13,10 +13,9 @@ std::vector<int> remove(const std::vector<int> &fila, int pos) {
 }
 
 std::vector<int> insert(const std::vector<int> &fila, int valor, int pos) {
-    std::vector<int> resultado(fila.begin(), fila.begin() + pos);
+    std::vector<int> resultado(fila);
 
-    resultado.push_back(valor);
-    resultado.insert(resultado.end(), fila.begin() + pos, fila.end());
+    resultado.insert(resultado.begin() + pos, valor);
 
     return resultado;
 }
