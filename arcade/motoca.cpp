@@ -78,7 +78,7 @@ public:
     }
 
     void honk() {
-        if (this->person == nullptr) {
+        if (this->person != nullptr) {
             std::cout << "P" << std::setw(this->power + 1) << std::setfill('e') << "m" << std::endl;
         }
     }
