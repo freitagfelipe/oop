@@ -1,2 +1,23 @@
-teste
+# Ignore all
+
+*
+
+# Unignore all with extensions
+
+!*.*
+
+#Unignore all directories
+
+!*/
+
+# Unignore makefile
+
+!makefile
+
+# Ignore the .o files generated at compilation
+
+*.o
+
+# Ignore vscode folder
+
 .vscode/
