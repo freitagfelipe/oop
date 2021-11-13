@@ -117,9 +117,9 @@ public:
             }
 
             this->is_closed = true;
-            this->playing.erase(this->playing.begin(), this->playing.end());
-            this->waiting.erase(this->waiting.begin(), this->waiting.end());
-            this->balance.erase(this->balance.begin(), this->balance.end());
+            this->playing.clear();
+            this->waiting.clear();
+            this->balance.clear();
         }
     }
 
