@@ -68,7 +68,7 @@ public:
             return;
         }
 
-        if (int(this->waiting.size()) == 0) {
+        if (this->waiting.size() == 0) {
             std::cout << "A fila está vazia!" << std::endl;
 
             return;
