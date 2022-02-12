@@ -12,7 +12,7 @@
 
 # Unignore makefile
 
-!makefile
+!Makefile
 
 # Ignore the .o files generated at compilation
 
