@@ -1,18 +1,17 @@
-
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "./includes/busca.hpp"
-#include "./includes/melhorCaso.hpp"
-#include "./includes/contagem.hpp"
-#include "./includes/filter.hpp"
-#include "./includes/acesso.hpp"
-#include "./includes/conjuntos.hpp"
-#include "./includes/manipulacao.hpp"
-#include "./includes/proximidade.hpp"
-#include "./includes/sequencias.hpp"
-#include "./includes/grupos.hpp"
-#include "./includes/alteracao.hpp"
+#include <busca.hpp>
+#include <melhor_caso.hpp>
+#include <contagem.hpp>
+#include <filtro.hpp>
+#include <acesso.hpp>
+#include <conjuntos.hpp>
+#include <manipulacao.hpp>
+#include <proximidade.hpp>
+#include <sequencias.hpp>
+#include <grupos.hpp>
+#include <alteracao.hpp>
 
 int main() {
     std::srand(std::time(NULL));
