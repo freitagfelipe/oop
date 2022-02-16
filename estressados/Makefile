@@ -3,7 +3,7 @@ compiler_flags = -Wall -Werror -Wextra -Iinclude
 all: main.o
 	g++ main.o -o main
 
-main.o:
+main.o: main.cpp
 	g++ main.cpp -c ${compiler_flags}
 
 clear:
