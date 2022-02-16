@@ -14,6 +14,12 @@ int procurar_menor_pos(const std::vector<int> &fila) {
 }
 
 int procurar_menor_pos_apartir(const std::vector<int> &fila, int inicio) {
+    if (inicio < 0) {
+        throw std::invalid_argument("A variável início deve ser maior ou igual a 0!");
+    } else if (inicio >= int(fila.size())) {
+        throw std::out_of_range("A variável início está ultrapassando o tamanho do vector!");
+    }
+
     std::vector<int>::const_iterator it {std::min_element(fila.begin() + inicio, fila.end())};
     
     return std::distance(fila.begin(), it);

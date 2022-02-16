@@ -4,6 +4,12 @@
 #include <cmath>
 
 std::vector<int> remover(const std::vector<int> &fila, int pos) {
+    if (pos < 0) {
+        throw std::invalid_argument("A variável pos deve ser maior ou igual a 0!");
+    } else if (pos >= int(fila.size())) {
+        throw std::out_of_range("A variável pos está ultrapassando o tamanho do vector!");
+    }
+
     std::vector<int> resultado(fila);
 
     resultado.erase(resultado.begin() + pos);
@@ -12,6 +18,12 @@ std::vector<int> remover(const std::vector<int> &fila, int pos) {
 }
 
 std::vector<int> insert(const std::vector<int> &fila, int valor, int pos) {
+    if (pos < 0) {
+        throw std::invalid_argument("A variável pos deve ser maior ou igual a 0!");
+    } else if (pos >= int(fila.size())) {
+        throw std::out_of_range("A variável pos está ultrapassando o tamanho do vector!");
+    }
+
     std::vector<int> resultado(fila);
 
     resultado.insert(resultado.begin() + pos, valor);
