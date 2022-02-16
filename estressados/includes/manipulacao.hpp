@@ -1,18 +1,17 @@
-#ifndef MANIPULACAO_HPP
-#define MANIPULACAO_HPP
+#pragma once
 
 #include <vector>
 #include <map>
 #include <algorithm>
 
-std::vector<int> sozinhosManipulacao(const std::vector<int> &fila) {
+std::vector<int> sozinhos(const std::vector<int> &fila) {
     std::vector<int> auxiliar;
 
     for (int estresse : fila) {
-        int elementoAtual = std::abs(estresse);
-        int quantasVezesAparece = std::count_if(fila.begin(), fila.end(), [elementoAtual](int x) { return std::abs(x) == elementoAtual; });
+        int estresse_atual {std::abs(estresse)};
+        int quantas_vezes_aparece {int(std::count_if(fila.begin(), fila.end(), [estresse_atual](int x) { return std::abs(x) == estresse_atual; }))};
 
-        if (quantasVezesAparece == 1) {
+        if (quantas_vezes_aparece == 1) {
             auxiliar.push_back(estresse);
         }
     }
@@ -20,42 +19,40 @@ std::vector<int> sozinhosManipulacao(const std::vector<int> &fila) {
     return auxiliar;
 }
 
-int maisOcorrencias(const std::vector<int> &fila) {
-    int ocorrencias = 0;
+int mais_ocorrencias(const std::vector<int> &fila) {
+    int ocorrencias {0};
 
     for (int estresse : fila) {
-        int quantasVezesAparece = std::count_if(fila.begin(), fila.end(), [estresse](int x) { return std::abs(x) == estresse; });
+        int quantas_vezes_aparece {int(std::count_if(fila.begin(), fila.end(), [estresse](int x) { return std::abs(x) == estresse; }))};
 
-        if (quantasVezesAparece > ocorrencias) {
-            ocorrencias = quantasVezesAparece;
+        if (quantas_vezes_aparece > ocorrencias) {
+            ocorrencias = quantas_vezes_aparece;
         }
     }
 
     return ocorrencias;
 }
 
-std::vector<int> maisRecorrentes(const std::vector<int> &fila) {
+std::vector<int> mais_recorrentes(const std::vector<int> &fila) {
     std::map<int, int> auxiliar;
     std::vector<int> resultado;
-    int maiorNumeroDeOcorrencias = maisOcorrencias(fila);
+    int maior_numero_de_ocorrencias {mais_ocorrencias(fila)};
 
     for (int estresse : fila) {
-        int estresseAbsoluto = std::abs(estresse);
+        int estresse_absoluto {std::abs(estresse)};
 
-        if (auxiliar.find(estresseAbsoluto) == auxiliar.end()) {
-            auxiliar[estresseAbsoluto] = 1;
+        if (auxiliar.find(estresse_absoluto) == auxiliar.end()) {
+            auxiliar[estresse_absoluto] = 1;
         } else {
-            auxiliar[estresseAbsoluto] += 1;
+            auxiliar[estresse_absoluto] += 1;
         }
     }
 
-    for (std::pair<int, int> pair : auxiliar) {
-        if (pair.second == maiorNumeroDeOcorrencias) {
-            resultado.push_back(pair.first);
+    for (auto &[estresse, quantidade] : auxiliar) {
+        if (quantidade == maior_numero_de_ocorrencias) {
+            resultado.push_back(estresse);
         }
     }
 
     return resultado;
 }
-
-#endif

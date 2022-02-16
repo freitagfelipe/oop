@@ -1,22 +1,21 @@
-#ifndef BUSCA_HPP
-#define BUSCA_HPP
+#pragma once
 
 #include <vector>
 #include <algorithm>
 
-bool existe(std::vector<int> fila, int x) {
+bool existe(const std::vector<int> &fila, int x) {
     return std::find(fila.begin(), fila.end(), x) == fila.end() ? false : true;
 }
 
-int contar(std::vector<int> fila, int x) {
+int contar(const std::vector<int> &fila, int x) {
     return std::count(fila.begin(), fila.end(), x);
 }
 
-int procurarValor(std::vector<int> fila, int x) {
-    std::vector<int>::iterator it = std::find(fila.begin(), fila.end(), x);
+int procurar_valor(const std::vector<int> &fila, int x) {
+    std::vector<int>::const_iterator it {std::find(fila.begin(), fila.end(), x)};
 
     if (it != fila.end()) {
-        int index = std::distance(fila.begin(), it);
+        int index {int(std::distance(fila.begin(), it))};
 
         return index;
     }
@@ -24,17 +23,14 @@ int procurarValor(std::vector<int> fila, int x) {
     return -1;
 }
 
-int procurarValorApartir(std::vector<int> fila, int x, int inicio) {
-    std::vector<int> auxiliar(fila.begin() + inicio, fila.end());
-    std::vector<int>::iterator it = std::find(auxiliar.begin(), auxiliar.end(), x);
+int procurar_valor_a_partir(const std::vector<int> &fila, int x, int inicio) {
+    std::vector<int>::const_iterator it {std::find(fila.begin() + inicio, fila.end(), x)};
 
     if (it != fila.end()) {
-        int index = std::distance(auxiliar.begin(), it);
+        int index {int(std::distance(fila.begin(), it))};
 
-        return index + inicio;
+        return index;
     }
 
     return -1;
 }
-
-#endif

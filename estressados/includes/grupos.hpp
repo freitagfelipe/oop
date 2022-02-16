@@ -1,5 +1,4 @@
-#ifndef GRUPOS_HPP
-#define GRUPOS_HPP
+#pragma once
 
 #include <vector>
 #include <cmath>
@@ -7,7 +6,6 @@
 
 int casais(const std::vector<int> &fila) {
     std::map<int, int> homens, mulheres;
-    int resultado = 0;
 
     for (int estresse : fila) {
         if (estresse > 0) {
@@ -25,12 +23,14 @@ int casais(const std::vector<int> &fila) {
         }
     }
 
-    for (std::pair<int, int> pair : homens) {
-        int estresse = pair.first * -1;
-        std::map<int, int>::iterator it = mulheres.find(estresse);
+    int resultado {0};
+
+    for (auto &[estresse, quantidade] : homens) {
+        int estresse_mulher {estresse * -1};
+        std::map<int, int>::iterator it {mulheres.find(estresse_mulher)};
 
         if (it != mulheres.end()) {
-            resultado += (pair.second + it->second) / 2;
+            resultado += (quantidade + it->second) / 2;
         }
     }
 
@@ -39,23 +39,22 @@ int casais(const std::vector<int> &fila) {
 
 int trios(const std::vector<int> &fila) {
     std::map<int, int> auxiliar;
-    int resultado = 0;
 
     for (int estresse : fila) {
-        int estresseAbsoluto = std::abs(estresse);
+        int estresse_absoluto {std::abs(estresse)};
 
-        if (auxiliar.find(estresseAbsoluto) == auxiliar.end()) {
-            auxiliar[estresseAbsoluto] = 1;
+        if (auxiliar.find(estresse_absoluto) == auxiliar.end()) {
+            auxiliar[estresse_absoluto] = 1;
         } else {
-            auxiliar[estresseAbsoluto] += 1;
+            auxiliar[estresse_absoluto] += 1;
         }
     }
 
-    for (std::pair<int, int> pair : auxiliar) {
-        resultado += pair.second / 3;
+    int resultado {0};
+
+    for (auto &[estresse, quantidade] : auxiliar) {
+        resultado += quantidade / 3;
     }
 
     return resultado;
 }
-
-#endif

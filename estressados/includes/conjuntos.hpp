@@ -1,5 +1,4 @@
-#ifndef CONJUNTOS_HPP
-#define CONJUNTOS_HPP
+#pragma once
 
 #include <vector>
 #include <cmath>
@@ -13,13 +12,11 @@ std::vector<int> exclusivos(const std::vector<int> &fila) {
 }
 
 std::vector<int> diferentes(const std::vector<int> &fila) {
-    for (int i : fila) {
-        if (i < 0) {
-            i = std::abs(i);
-        }
-    }
+    std::set<int> auxiliar;
 
-    std::set<int> auxiliar(fila.begin(), fila.end());
+    for (int i : fila) {
+        auxiliar.insert(std::abs(i));
+    }
 
     return std::vector<int>(auxiliar.begin(), auxiliar.end());
 }
@@ -27,15 +24,13 @@ std::vector<int> diferentes(const std::vector<int> &fila) {
 std::vector<int> abandonados(const std::vector<int> &fila) {
     std::vector<int> auxiliar;
 
-    for (int i = 0; i < int(fila.size()); i++) {
-        if (std::find(auxiliar.begin(), auxiliar.end(), fila[i]) == auxiliar.end()) {
-            int quantasVezesAparece = std::count(fila.begin(), fila.end(), fila[i]);
+    for (size_t i {0}; i < fila.size(); ++i) {
+        if (std::find(auxiliar.begin(), auxiliar.end(), fila.at(i)) == auxiliar.end()) {
+            int quantas_vezes_aparece {int(std::count(fila.begin(), fila.end(), fila.at(i)))};
 
-            auxiliar.insert(auxiliar.end(), quantasVezesAparece - 1, fila[i]);
+            auxiliar.insert(auxiliar.end(), quantas_vezes_aparece - 1, fila.at(i));
         }
     }
 
     return auxiliar;
 }
-
-#endif

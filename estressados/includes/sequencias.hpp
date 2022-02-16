@@ -1,53 +1,52 @@
-#ifndef SEQUENCIAS_HPP
-#define SEQUENCIAS_HPP
+#pragma once
 
 #include <vector>
 
-enum Sexo { feminino, masculino };
+enum class Sexo { feminino, masculino };
 
-int tamanhoDoTime(std::vector<int> &fila, int tamanhoDoTimeAtual, Sexo sexoDoTimeAtual) {
-    if (fila.size() == 0) {
-        return tamanhoDoTimeAtual;
+std::pair<int, int> tamanho_do_time(const std::vector<int> &fila, int tamanho_do_time_atual, Sexo sexo_do_time_atual, size_t index_atual) {
+    if (fila.size() == index_atual) {
+        return {tamanho_do_time_atual, index_atual};
     }
 
-    Sexo sexoAtual = fila.at(0) > 0 ? masculino : feminino;
+    Sexo sexo_atual {fila.at(index_atual) > 0 ? Sexo::masculino : Sexo::feminino};
 
-    if (sexoAtual != sexoDoTimeAtual) {
-        return tamanhoDoTimeAtual;
+    if (sexo_atual != sexo_do_time_atual) {
+        return {tamanho_do_time_atual, index_atual};
     }
 
-    fila.erase(fila.begin());
-
-    return tamanhoDoTime(fila, tamanhoDoTimeAtual + 1, sexoDoTimeAtual);
+    return tamanho_do_time(fila, tamanho_do_time_atual + 1, sexo_do_time_atual, index_atual + 1);
 }
 
-int quantosTimes(const std::vector<int> &fila) {
-    std::vector<int> copia(fila);
-    int resultado = 0;
+int quantos_times(const std::vector<int> &fila) {
+    int resultado {0};
+    size_t index {0};
 
-    while (copia.size()) {
-        Sexo sexoAtual = copia.at(0) > 0 ? masculino : feminino;
+    while (index < fila.size()) {
+        Sexo sexoAtual {fila.at(index) > 0 ? Sexo::masculino : Sexo::feminino};
 
-        int tamanhoDoTimeAtual = tamanhoDoTime(copia, 0, sexoAtual);
+        auto [tamanho_do_time_atual, index_atual] {tamanho_do_time(fila, 0, sexoAtual, index)};
 
-        if (tamanhoDoTimeAtual > 1) {
+        if (tamanho_do_time_atual > 1) {
             resultado++;
         }
+
+        index = index_atual;
     }
 
     return resultado;
 }
 
-std::vector<int> maiorTime(const std::vector<int> &fila) {
+std::vector<int> maior_time(const std::vector<int> &fila) {
     std::vector<int> auxiliar;
     std::vector<int> resultado;
-    Sexo timeAtual = fila.at(0) > 0 ? masculino : feminino;
+    Sexo time_atual {fila.at(0) > 0 ? Sexo::masculino : Sexo::feminino};
 
-    for (int i = 0; i < int(fila.size()); i++) {
-        Sexo sexoAtual = fila.at(i) > 0 ? masculino : feminino;
+    for (size_t i {0}; i < fila.size(); ++i) {
+        Sexo sexo_atual {fila.at(i) > 0 ? Sexo::masculino : Sexo::feminino};
 
-        if (sexoAtual != timeAtual) {
-            timeAtual = sexoAtual;
+        if (sexo_atual != time_atual) {
+            time_atual = sexo_atual;
 
             if (auxiliar.size() > 1 && auxiliar.size() > resultado.size()) {
                 resultado = auxiliar;
@@ -66,21 +65,21 @@ std::vector<int> maiorTime(const std::vector<int> &fila) {
     return resultado;
 }
 
-int sozinhosSequencia(const std::vector<int> &fila) {
-    std::vector<int> copia(fila);
-    int sozinhos = 0;
+int sem_time(const std::vector<int> &fila) {
+    int sozinhos {0};
+    size_t index {0};
 
-    while (copia.size()) {
-        Sexo sexoAtual = copia.at(0) > 0 ? masculino : feminino;
+    while (index < fila.size()) {
+        Sexo sexo_atual {fila.at(index) > 0 ? Sexo::masculino : Sexo::feminino};
 
-        int tamanhoDoTimeAtual = tamanhoDoTime(copia, 0, sexoAtual);
+        auto [tamanho_do_time_atual, index_atual] {tamanho_do_time(fila, 0, sexo_atual, index)};
 
-        if (tamanhoDoTimeAtual == 1) {
+        if (tamanho_do_time_atual == 1) {
             sozinhos++;
         }
+
+        index = index_atual;
     }
 
     return sozinhos;
 }
-
-#endif
