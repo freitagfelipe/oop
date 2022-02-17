@@ -1,41 +1,25 @@
 #pragma once
 
+#include <iostream>
 #include <worker.hpp>
 
 class Developer : public Worker {
 public:
-    Developer(std::string name, int age, std::string company, double salary, std::string favorite_language, std::string work_language) : Worker(name, age, company, salary) {
-        this->favorite_language = favorite_language;
-        this->work_language = work_language;
-    }
+    Developer(const std::string &name, int age, const std::string &company, double salary, const std::string &favorite_language, const std::string &work_language);
 
-    void work() const override {
-        std::cout << "I'm working with my " << this->work_language << std::endl;
-    }
+    virtual ~Developer();
 
-    std::string get_favorite_language() const {
-        return this->favorite_language;
-    }
+    void work() const override;
 
-    void set_favorite_language(std::string new_favorite_language) {
-        this->favorite_language = new_favorite_language;
-    }
+    std::string get_favorite_language() const;
 
-    std::string get_work_language() const {
-        return this->work_language;
-    }
+    void set_favorite_language(const std::string &new_favorite_language);
 
-    void set_work_language(std::string new_work_language) {
-        this->work_language = new_work_language;
-    }
+    std::string get_work_language() const;
 
-    friend std::ostream& operator<<(std::ostream &os, const Developer &developer) {
-        const Worker &worker = developer;
+    void set_work_language(const std::string &new_work_language);
 
-        os << worker << "\nFavorite language: " << developer.favorite_language << "\nWork language: " << developer.work_language;
-
-        return os;
-    }
+    friend std::ostream& operator<<(std::ostream &os, const Developer &developer);
 
 private:
     std::string favorite_language;

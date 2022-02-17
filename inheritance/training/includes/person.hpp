@@ -4,28 +4,19 @@
 
 class Person {
 public:
-    Person(std::string name, int age) {
-        this->name = name;
-        this->age = age;
-    }
+    Person(const std::string &name, int age);
 
-    std::string get_name() const {
-        return this->name;
-    }
+    virtual ~Person();
 
-    void set_name(std::string name) {
-        this->name = name;
-    }
+    std::string get_name() const;
 
-    int get_age() const {
-        return this->age;
-    }
+    void set_name(const std::string &new_name);
 
-    friend std::ostream& operator<<(std::ostream &os, const Person &person) {
-        os << "Name: " << person.name << "\nAge: " << person.age;
+    int get_age() const;
 
-        return os;
-    }
+    void set_age(int new_age);
+
+    friend std::ostream& operator<<(std::ostream &os, const Person &person);
 
 private:
     std::string name;

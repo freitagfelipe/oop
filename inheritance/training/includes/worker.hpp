@@ -1,42 +1,25 @@
 #pragma once
 
+#include <iostream>
 #include <person.hpp>
-#include <sstream>
 
 class Worker : public Person {
 public:
-    Worker(std::string name, int age, std::string company, double salary) : Person(name, age) {
-        this->company = company;
-        this->salary = salary;
-    }
+    Worker(const std::string &name, int age, const std::string &company, double salary);
 
-    virtual void work() const {
-        std::cout << "I'm working..." << std::endl;
-    }
+    virtual ~Worker();
 
-    std::string get_company() const {
-        return this->company;
-    }
+    virtual void work() const;
 
-    void set_company(std::string new_company) {
-        this->company = new_company;
-    }
+    std::string get_company() const;
 
-    double get_salary() const {
-        return this->salary;
-    }
+    void set_company(const std::string &new_company);
 
-    void set_salary(double salary) {
-        this->salary = salary;
-    }
+    double get_salary() const;
 
-    friend std::ostream& operator<<(std::ostream &os, const Worker &worker) {
-        const Person &person = worker;
+    void set_salary(double salary);
 
-        os << person << "\nCompany: " << worker.company << "\nSalary: " << worker.salary;
-
-        return os;
-    }
+    friend std::ostream& operator<<(std::ostream &os, const Worker &worker);
 
 private:
     std::string company;
